@@ -42,6 +42,21 @@ func main() {
 
 	nexus.Set("dial", dial)
 	nexus.Set("errors", nxcore.ErrStr)
+	nexus.Set("ErrParse", nxcore.ErrParse)
+	nexus.Set("ErrInvalidRequest", nxcore.ErrInvalidRequest)
+	nexus.Set("ErrInternal", nxcore.ErrInternal)
+	nexus.Set("ErrInvalidParams", nxcore.ErrInvalidParams)
+	nexus.Set("ErrMethodNotFound", nxcore.ErrMethodNotFound)
+	nexus.Set("ErrTtlExpired", nxcore.ErrTtlExpired)
+	nexus.Set("ErrPermissionDenied", nxcore.ErrPermissionDenied)
+	nexus.Set("ErrConnClosed", nxcore.ErrConnClosed)
+	nexus.Set("ErrLockNotOwned", nxcore.ErrLockNotOwned)
+	nexus.Set("ErrUserExists", nxcore.ErrUserExists)
+	nexus.Set("ErrInvalidUser", nxcore.ErrInvalidUser)
+	nexus.Set("ErrInvalidPipe", nxcore.ErrInvalidPipe)
+	nexus.Set("ErrInvalidTask", nxcore.ErrInvalidTask)
+	nexus.Set("ErrCancel", nxcore.ErrCancel)
+	nexus.Set("ErrTimeout", nxcore.ErrTimeout)
 
 	println("Nexus Client loaded")
 }
