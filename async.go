@@ -208,6 +208,12 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("userSetDisabled", func(user string, disabled bool, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserSetDisabled(user, disabled)
+			ret(r, e, cb)
+		}()
+	})
 	jsnc.Set("sessionList", func(prefix string, limit int, skip int, cb ...*js.Object) {
 		go func() {
 			r, e := nc.SessionList(prefix, limit, skip)
