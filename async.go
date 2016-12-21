@@ -142,6 +142,12 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("userGetTags", func(user string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserGetTags(user)
+			ret(r, e, cb)
+		}()
+	})
 	jsnc.Set("userSetTags", func(user string, prefix string, tags map[string]interface{}, cb ...*js.Object) {
 		go func() {
 			r, e := nc.UserSetTags(user, prefix, tags)
