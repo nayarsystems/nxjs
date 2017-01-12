@@ -142,6 +142,12 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("userGetTags", func(user string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserGetTags(user)
+			ret(r, e, cb)
+		}()
+	})
 	jsnc.Set("userSetTags", func(user string, prefix string, tags map[string]interface{}, cb ...*js.Object) {
 		go func() {
 			r, e := nc.UserSetTags(user, prefix, tags)
@@ -205,6 +211,12 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 	jsnc.Set("userSetMaxSessions", func(user string, max int, cb ...*js.Object) {
 		go func() {
 			r, e := nc.UserSetMaxSessions(user, max)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("userSetDisabled", func(user string, disabled bool, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserSetDisabled(user, disabled)
 			ret(r, e, cb)
 		}()
 	})
