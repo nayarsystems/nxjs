@@ -112,6 +112,16 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("setInactivityTimeout", func(timeout float64, cb ...*js.Object) {
+		go func() {
+			e := nc.SetInactivityTimeout(time.Duration(timeout * float64(time.Second)))
+			cb[0].Invoke(e)
+			if e == nil {
+				<-nc.GetContext().Done()
+				cb[1].Invoke(true)
+			}
+		}()
+	})
 	jsnc.Set("taskPush", func(method string, params interface{}, timeout float64, cb ...*js.Object) {
 		go func() {
 			r, e := nc.TaskPush(method, params, time.Duration(timeout*float64(time.Second)))
