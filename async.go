@@ -140,6 +140,24 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("taskListWithOpts", func(prefix string, limit int, skip int, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TaskList(prefix, limit, skip, getListOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("taskCount", func(prefix string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TaskCount(prefix)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("taskCountWithOpts", func(prefix string, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TaskCount(prefix, getCountOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
 	jsnc.Set("userCreate", func(user string, pass string, cb ...*js.Object) {
 		go func() {
 			r, e := nc.UserCreate(user, pass)
@@ -152,9 +170,21 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("userRename", func(user string, new string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserRename(user, new)
+			ret(r, e, cb)
+		}()
+	})
 	jsnc.Set("userGetTags", func(user string, cb ...*js.Object) {
 		go func() {
 			r, e := nc.UserGetTags(user)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("userGetEffectiveTags", func(user string, prefix string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserGetEffectiveTags(user, prefix)
 			ret(r, e, cb)
 		}()
 	})
@@ -179,6 +209,24 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 	jsnc.Set("userList", func(prefix string, limit int, skip int, cb ...*js.Object) {
 		go func() {
 			r, e := nc.UserList(prefix, limit, skip)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("userListWithOpts", func(prefix string, limit int, skip int, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserList(prefix, limit, skip, getListOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("userCount", func(prefix string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserCount(prefix)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("userCountWithOpts", func(prefix string, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.UserCount(prefix, getCountOpts(opts))
 			ret(r, e, cb)
 		}()
 	})
@@ -233,6 +281,24 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 	jsnc.Set("sessionList", func(prefix string, limit int, skip int, cb ...*js.Object) {
 		go func() {
 			r, e := nc.SessionList(prefix, limit, skip)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("sessionListWithOpts", func(prefix string, limit int, skip int, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.SessionList(prefix, limit, skip, getListOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("sessionCount", func(prefix string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.SessionCount(prefix)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("sessionCountWithOpts", func(prefix string, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.SessionCount(prefix, getCountOpts(opts))
 			ret(r, e, cb)
 		}()
 	})
@@ -301,6 +367,30 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 			ret(r, e, cb)
 		}()
 	})
+	jsnc.Set("topicList", func(prefix string, limit int, skip int, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TopicList(prefix, limit, skip)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("topicListWithOpts", func(prefix string, limit int, skip int, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TopicList(prefix, limit, skip, getListOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("topicCount", func(prefix string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TopicCount(prefix)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("topicCountWithOpts", func(prefix string, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.TopicCount(prefix, getCountOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
 	jsnc.Set("lock", func(lock string, cb ...*js.Object) {
 		go func() {
 			r, e := nc.Lock(lock)
@@ -310,6 +400,30 @@ func WrapNexusConn(nc *nxcore.NexusConn) *js.Object {
 	jsnc.Set("unlock", func(lock string, cb ...*js.Object) {
 		go func() {
 			r, e := nc.Unlock(lock)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("lockList", func(prefix string, limit int, skip int, cb ...*js.Object) {
+		go func() {
+			r, e := nc.LockList(prefix, limit, skip)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("lockListWithOpts", func(prefix string, limit int, skip int, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.LockList(prefix, limit, skip, getListOpts(opts))
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("lockCount", func(prefix string, cb ...*js.Object) {
+		go func() {
+			r, e := nc.LockCount(prefix)
+			ret(r, e, cb)
+		}()
+	})
+	jsnc.Set("lockCountWithOpts", func(prefix string, opts *js.Object, cb ...*js.Object) {
+		go func() {
+			r, e := nc.LockCount(prefix, getCountOpts(opts))
 			ret(r, e, cb)
 		}()
 	})

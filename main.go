@@ -60,3 +60,48 @@ func main() {
 
 	println("Nexus Client loaded")
 }
+
+func getListOpts(o *js.Object) *nxcore.ListOpts {
+	if o == nil {
+		o = js.Global.Get("Object").New()
+	}
+	return &nxcore.ListOpts{
+		LimitByDepth: jsObjectGetBool(o, "LimitByDepth", false),
+		Depth:        jsObjectGetInt(o, "Depth", -1),
+		Filter:       jsObjectGetString(o, "Filter", ""),
+	}
+}
+
+func getCountOpts(o *js.Object) *nxcore.CountOpts {
+	if o == nil {
+		o = js.Global.Get("Object").New()
+	}
+	return &nxcore.CountOpts{
+		Subprefixes: jsObjectGetBool(o, "Subprefixes", false),
+		Filter:      jsObjectGetString(o, "Filter", ""),
+	}
+}
+
+func jsObjectGetBool(o *js.Object, k string, d bool) bool {
+	if v := o.Get(k); v == js.Undefined {
+		return d
+	} else {
+		return v.Bool()
+	}
+}
+
+func jsObjectGetInt(o *js.Object, k string, d int) int {
+	if v := o.Get(k); v == js.Undefined {
+		return d
+	} else {
+		return v.Int()
+	}
+}
+
+func jsObjectGetString(o *js.Object, k string, d string) string {
+	if v := o.Get(k); v == js.Undefined {
+		return d
+	} else {
+		return v.String()
+	}
+}
